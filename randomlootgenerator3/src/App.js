@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlexibleColumnLayout, List, StandardListItem, NotificationListItem, Title, Text, Grid, FCLLayout, ShellBar, Card, RatingIndicator, Toolbar, ToolbarDesign, ToolbarSpacer, Button, ButtonDesign, Avatar, AvatarSize, FlexBox, FlexBoxDirection, Label, } from '@ui5/webcomponents-react';
+import { FlexibleColumnLayout, List, StandardListItem,  Title,  Grid, FCLLayout, Toolbar, ToolbarDesign, ToolbarSpacer, Button, ButtonDesign } from '@ui5/webcomponents-react';
 
 import './App.css';
 
@@ -15,29 +15,49 @@ function App() {
     country: 'Poland'
   }]
 
-  const specificItemData = [{
+  const specificItemData = [
+    {
     name: 'Halabarda'
-
   }, {
     name: 'Miecz Oburęczny'
-
   }, {
     name: 'Kusza'
-
   }];
 
-  const [layout, setLayout] = useState(FCLLayout.OneColumn);
+  const objectCategory= [
+    {name: 'Armors', category: 'armor'},{name: 'Melee weapons', category: 'melee'},{name: 'Ranged weapons', category: 'ranged'}
+  ];
+
+  const specificObject = [
+    {name: 'chainmail', category: 'armor'},{name: 'plate mail', category: 'armor'},{name: 'leather brest plate', category: 'armor'},
+    {name: 'sword', category: 'melee'},{name: 'halbeard', category: 'melee'},{name: 'pike', category: 'melee'},
+    {name: 'bow', category: 'ranged'},{name: 'crossbow', category: 'ranged'},{name: 'slinger', category: 'ranged'}
+  ]
+
+  const itemsReadyToDraw = [{name: 'plate mail'}];
+
+  const [layoutChooseItems, setChooseItemsLayout] = useState(FCLLayout.OneColumn);
+  const [layoutDrawItems, setDrawItemsLayout] = useState(FCLLayout.OneColumn);
+  
   const [selectedMovie, setSelectedMovie] = useState(itemsCategoryData[0]);
   const [selectedCast, setSelectedCast] = useState(specificItemData[0]);
 
-  const onStartColumnClick = e => {
-    setSelectedMovie(itemsCategoryData.find(item => item.movie === e.detail.item.dataset.movie));
-    setLayout(FCLLayout.TwoColumnsMidExpanded);
+  const [selectedObjectCategory, setSelectedObjectCategory] = useState(objectCategory[0]);
+  const [selectedSpecificObject, setSelectedspecificObject] = useState(specificObject[0]);
+
+  const [selectedItemsReadyToDraw, setSelectedItemsReadyToDraw] = useState(itemsReadyToDraw)
+
+
+  const onCategoryItemClick = e => {
+    setSelectedObjectCategory(objectCategory.find(item => item.category === e.detail.item.dataset.category));
+    setChooseItemsLayout(FCLLayout.TwoColumnsMidExpanded)
   };
 
   const onMiddleColumnClick = e => {
     setSelectedCast(specificItemData.find(item => item.name === e.detail.item.dataset.name));
-    setLayout(FCLLayout.ThreeColumnsEndExpanded);
+
+    // setChooseItemsLayout(FCLLayout.ThreeColumnsEndExpanded);
+    // setDrawItemsLayout(FCLLayout.ThreeColumnsEndExpanded);
   };
   return (
     <div className="App">
@@ -46,109 +66,108 @@ function App() {
         secondary-title="author: Bartosz Dudek"
       >
       </ui5-shellbar>
-      <Grid defaultSpan="XL6 L6 M6 S12" style={{ padding: 10, margin: 5 }} >
-        <div data-layout-span="XL12 L12 M12 S12" data-layout-indent="XL0 L0 M0 S0">
-        <ui5-card heading="New Purchase Orders" subheading="Today" status="3 of 15" class="medium">
-	<ui5-table class="demo-table content-padding">
+      <Grid defaultSpan="XL12 L12 M12 S12" style={{ padding: 10, margin: 5 }} >
+        <div data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
+        <ui5-card heading="Historia losowanych przedmiotów" subheading="Today" status="3 of 15" class="medium">
+         <List>
+         {specificObject.filter(item => item.category === selectedObjectCategory.category).map(item => <StandardListItem data-name={item.name} data-category={item.category}>
+                  {item.name}
+                </StandardListItem>)}
+         </List>
+      </ui5-card>
+      </div>
+      <div data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
+        <p>Miejsce na detale wybranego przedmiotu</p>
+      </div>
 
-		<ui5-table-column slot="columns">
-            <ui5-label>Sales Order</ui5-label>
-		</ui5-table-column>
-
-		<ui5-table-column slot="columns">
-            <ui5-label>Customer</ui5-label>
-		</ui5-table-column>
-
-		<ui5-table-column slot="columns">
-            <ui5-label>Net Amount</ui5-label>
-		</ui5-table-column>
-
-		<ui5-table-column slot="columns" min-width="450" popin-text="Status" demand-popin>
-            <ui5-label>Status</ui5-label>
-		</ui5-table-column>
-
-		<ui5-table-row >
-			<ui5-table-cell>
-				<ui5-label>5000010051</ui5-label>
-			</ui5-table-cell>
-			<ui5-table-cell>
-				<ui5-label>Brazil Techologies</ui5-label>
-			</ui5-table-cell>
-			<ui5-table-cell>
-					<ui5-label>2k USD</ui5-label>
-			</ui5-table-cell>
-			<ui5-table-cell>
-				<span class="status-error">Rejected</span>
-			</ui5-table-cell>
-		</ui5-table-row>
-
-	</ui5-table>
-</ui5-card>
-        </div>
-        <div>
+        <div data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
           <FlexibleColumnLayout
-            className=""
-            layout="TwoColumnsStartExpanded"
-            onLayoutChange={function noRefCheck() { }}
-            slot=""
-            startColumn={
-              <div>
-                <List>
-                  <ui5-button design="Positive" >Losuj przedmiot</ui5-button>
-                  <ui5-button design="Negatice" >Oczyść listę</ui5-button>
-                </List>
-                <List headerText="Lista przedmiotów losowanych" mode="Delete">
-                  <StandardListItem>List Item 1</StandardListItem>
-                  <StandardListItem>List Item 2</StandardListItem>
-                  <StandardListItem>List Item 1</StandardListItem>
-                  <StandardListItem>List Item 2</StandardListItem>
-                  <StandardListItem>List Item 1</StandardListItem>
-                  <StandardListItem>List Item 2</StandardListItem>
-                  <StandardListItem>List Item 1</StandardListItem>
-                  <StandardListItem>List Item 2</StandardListItem>
-                </List>
-              </div>}
-            midColumn={
-
-              <List headerText="Wylosowane">
-                <StandardListItem>xxx</StandardListItem>
-
-              </List>} Z
-            style={{}}
-            tooltip=""
-          />
-        </div>
-        <div>
-          <FlexibleColumnLayout
-            layout="TwoColumnsStartExpanded" style={{
+            style={{
               height: '600px'
-            }} layout={layout} startColumn={<>
-
-              <List headerText="Kategorie przedmiotów do losowania" onItemClick={onStartColumnClick}>
-                {itemsCategoryData.map(item => <StandardListItem description={item.genre} data-movie={item.movie}>
-                  {item.movie}
+            }} 
+            layout={layoutChooseItems} startColumn={<>
+              <List headerText="Kategorie przedmiotów do losowania" onItemClick={onCategoryItemClick}>
+              {/* <List headerText="Kategorie przedmiotów do losowania" onItemClick={() => {
+                  setChooseItemsLayout(FCLLayout.TwoColumnsMidExpanded);
+              }}> */}
+                {objectCategory.map(item => <StandardListItem description={`Quantity:  ${objectCategory.length}`} data-name={item.name} data-category={item.category}>
+                  {item.name}
                 </StandardListItem>)}
               </List>
             </>} midColumn={<>
               <Toolbar design={ToolbarDesign.Solid}>
-                <Title>{selectedMovie.movie}</Title>
-                
+                <Title>{selectedObjectCategory.name}</Title>
                 <ToolbarSpacer />
                 <Button icon="decline" design={ButtonDesign.Transparent} onClick={() => {
-                  setLayout(FCLLayout.OneColumn);
+                  setChooseItemsLayout(FCLLayout.OneColumn);
                 }} />
               </Toolbar>
-              <ui5-button design="Negatice" >Dodaj wszystkie wybrane</ui5-button>
-              <List headerText="Cast" mode="MultiSelect">
-                {specificItemData.map(item => <StandardListItem description={item.gender} data-name={item.name}>
+              {/* <ui5-button design="Negatice" onClick={() => console.log()} >Dodaj wszystkie wybrane</ui5-button> */}
+              <List id="itemsToDrawList" headerText="Przedmioty" mode="SingleSelect" onItemClick={(item) => {setSelectedItemsReadyToDraw([...selectedItemsReadyToDraw,{name: `${item.detail.item.dataset.name}`}]);console.log(item.detail.item.dataset.name)}}>
+                {specificObject.filter(item => item.category === selectedObjectCategory.category).map(item => <StandardListItem data-name={item.name}>
                   {item.name}
                 </StandardListItem>)}
               </List>
-            </>} />
+            </>}
+            
+                endColumn={<>
+                <Toolbar design={ToolbarDesign.Solid}>
+                <Title>Miejsce na kontrolki losowania</Title>
+                
+                <ToolbarSpacer />
+                <Button icon="decline" design={ButtonDesign.Transparent} onClick={() => {
+                  setChooseItemsLayout(FCLLayout.OneColumn);
+                }} />
+              </Toolbar>
+                
+                </>}/>
         </div>
-
+        
+        <div data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
+          <FlexibleColumnLayout
+            
+            style={{
+              height: '600px'
+            }} 
+            layout={layoutDrawItems}
+            onLayoutChange={function noRefCheck() { }}
+            
+            startColumn={
+              <div>
+              <Toolbar design={ToolbarDesign.Solid}>
+                <Title>Lista przedmiotów losowanych</Title>
+                <ToolbarSpacer />
+                <Button icon="add"  onClick={() => {
+                  setDrawItemsLayout(FCLLayout.TwoColumnsMidExpanded);
+                }} />
+              </Toolbar>
+              <ui5-button design="Positive" onClick={() => {
+                setDrawItemsLayout(FCLLayout.TwoColumnsMidExpanded);
+              }} >Losuj przedmiot</ui5-button>
+              <ui5-button design="none" onClick={() => setSelectedItemsReadyToDraw([])} >Oczyść listę</ui5-button>
+                <List mode="None" onItemClick={object => {setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name !== object.target.innerText))}}>
+                {selectedItemsReadyToDraw? selectedItemsReadyToDraw.map(item => <StandardListItem>
+                  {item.name}
+                </StandardListItem>): null}
+                </List>
+              </div>}
+            midColumn={<>
+            <Toolbar design={ToolbarDesign.Solid}>
+                <Title>Wylosowane Przedmioty</Title>
+                
+                <ToolbarSpacer />
+                <Button icon="decline" design={ButtonDesign.Transparent} onClick={() => {
+                  setDrawItemsLayout(FCLLayout.OneColumn);
+                }} />
+              </Toolbar>
+              <List>
+                <StandardListItem>xxx</StandardListItem>
+              </List></>} Z
+            style={{}}
+            tooltip=""
+          />
+        </div>
       </Grid>
-
     </div>
   );
 }
