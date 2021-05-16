@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import { FlexibleColumnLayout, List, StandardListItem,  Title,  Grid, FCLLayout, Toolbar, ToolbarDesign, ToolbarSpacer, Button, ButtonDesign } from '@ui5/webcomponents-react';
 // import { setTheme } from '@ui5/webcomponents-base/dist/config/Theme';
+import "@ui5/webcomponents/dist/Assets.js";
+import "@ui5/webcomponents-fiori/dist/Assets.js"; //  if you use @ui5/webcomponents-fiori
+import { setTheme } from "@ui5/webcomponents-base/dist/config/Theme.js";
 import './App.css';
 
 function App() {
 
+  // setTheme("sap_belize");
+  // setTheme("sap_belize_hcb");
+  // setTheme("sap_belize_hcw");
+  setTheme("sap_fiori_3");
   // setTheme("sap_fiori_dark");
   const itemsCategoryData = [{
     movie: 'Bronie Dystansowe',
