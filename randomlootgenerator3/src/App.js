@@ -19,7 +19,7 @@ function App() {
   // setTheme("sap_belize");
   // setTheme("sap_belize_hcb");
   // setTheme("sap_belize_hcw");
-  setTheme("sap_fiori_3");
+  // setTheme("sap_fiori_3");
   // setTheme("sap_fiori_dark");
 
   const objectCategory= [
@@ -65,14 +65,14 @@ function App() {
       ></ui5-shellbar>
       <Grid defaultSpan="XL12 L12 M12 S12" style={{ padding: 10, margin: 5 }}>
         <div data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
-          <FlexibleColumnLayout
+          <FlexibleColumnLayout className='oldBackground'
               style={{
                 height: '600px'
               }} 
               layout={layoutHistoryOfDrawnItems} 
-              startColumn={<>
-                <Toolbar design={ToolbarDesign.Solid}>
-                <Title>Obecnie wylosowane przedmioty</Title> 
+              startColumn={<> 
+                <Toolbar>
+                <Title className='oldBackground'>Obecnie wylosowane przedmioty</Title> 
                 <ToolbarSpacer/>
                 <Button icon="add" design={ButtonDesign.Transparent} onClick={() => {
                    setHistoryOfDrawnItemsLayout(FCLLayout.TwoColumnsMidExpanded);
@@ -87,7 +87,7 @@ function App() {
                 </List>
               </>} 
               midColumn={<>
-                <Toolbar design={ToolbarDesign.Solid}>
+                <Toolbar>
                 <Title>Historia Wylosowanych Przedmiotów</Title> 
                 <ToolbarSpacer/>
                 <ui5-button design="Negative" onClick={() => setSelectedHistoryOfDrawnedItems(selectedHistoryOfDrawnedItems.filter(item => item.name === 12345 ))}>
@@ -106,11 +106,11 @@ function App() {
                 </>}           
             />
       </div>
-      <div data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
-        <ui5-card  heading="Informacje o wybranym przedmiocie" subheading={ChoosenObject.name.toUpperCase()} className="medium">
+      <div className='oldBackground' data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
+        <ui5-card className='oldBackground' heading="Informacje o wybranym przedmiocie"  subheading={ChoosenObject.name.toUpperCase()}>
         
-      	  <div className="card-content">
-            <ui5-list mode="None" separators="None" className="card-content-child"  style={{height: '500px'}} growing="Scroll">
+      	  <div className='oldBackground'>
+            <ui5-list  mode="None" separators="None"  style={{height: '500px'}} growing="Scroll">
             
               {Object.entries(ChoosenObject).map(value => <ui5-li type="Inactive">{value[0].toUpperCase()} : {value[1].charAt(0) === "/" ? <ui5-avatar image={ChoosenObject.image} ></ui5-avatar> : value[1]}</ui5-li>)}
             </ui5-list>
@@ -119,7 +119,7 @@ function App() {
       </div>
 
         <div data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
-          <FlexibleColumnLayout
+          <FlexibleColumnLayout 
             style={{
               height: '600px'
             }} 
@@ -134,7 +134,7 @@ function App() {
                 </StandardListItem>)}
               </List>
             </>} midColumn={<>
-              <Toolbar design={ToolbarDesign.Solid}>
+              <Toolbar>
                 
                 <Title>{selectedObjectCategory.name}</Title>
                 <ToolbarSpacer />
@@ -153,7 +153,7 @@ function App() {
               </List>
             </>}           
                 endColumn={<>
-                <Toolbar design={ToolbarDesign.Solid}>
+                <Toolbar>
                 <Title>Miejsce na kontrolki losowania</Title>
                 
                 <ToolbarSpacer />
@@ -174,7 +174,7 @@ function App() {
             
             startColumn={
               <div>
-              <Toolbar design={ToolbarDesign.Solid}>
+              <Toolbar>
                 <Title>Lista przedmiotów losowanych</Title>
               </Toolbar>
               <ui5-button design="Positive" onClick={() => {
