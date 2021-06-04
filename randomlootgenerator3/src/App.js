@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
 import { FlexibleColumnLayout, List, StandardListItem,  Title,  Grid, FCLLayout, Toolbar, ToolbarDesign, ToolbarSpacer, Button, ButtonDesign } from '@ui5/webcomponents-react';
 // import { setTheme } from '@ui5/webcomponents-base/dist/config/Theme';
+import  { melee, ranged, armor, potion, general, treasure, food, clothes, tools } from './itemsVault';
 import "@ui5/webcomponents/dist/Assets.js";
 import "@ui5/webcomponents-fiori/dist/Assets.js"; //  if you use @ui5/webcomponents-fiori
 import { setTheme } from "@ui5/webcomponents-base/dist/config/Theme.js";
 import './App.css';
+import {
+  armorImg,
+  meleeImg,
+  rangedImg,
+  clothesImg
+} from './img'
+
 
 function App() {
 
@@ -13,41 +21,20 @@ function App() {
   // setTheme("sap_belize_hcw");
   setTheme("sap_fiori_3");
   // setTheme("sap_fiori_dark");
-  const itemsCategoryData = [{
-    movie: 'Bronie Dystansowe',
-    genre: '',
-    country: 'Russia'
-  }, {
-    movie: 'Bronie Białe',
-    genre: '',
-    country: 'Poland'
-  }]
-
-  const specificItemData = [
-    {
-    name: 'Halabarda'
-  }, {
-    name: 'Miecz Oburęczny'
-  }, {
-    name: 'Kusza'
-  }];
 
   const objectCategory= [
-    {name: 'Armors', category: 'armor'},{name: 'Melee weapons', category: 'melee'},{name: 'Ranged weapons', category: 'ranged'}
+    {name: 'Armors', category: 'armor', image:armorImg},{name: 'Melee weapons', category: 'melee', image:meleeImg},{name: 'Ranged weapons', category: 'ranged', image:rangedImg}, {name: 'Clothes', category: 'clothes', image:clothesImg}
   ];
 
-  const mockChoosenObject={name:"Potion of Healing", cost:'10gp', description:'heal fo 1d10', category:'potion',a:1,b:2,c:3,d:4,e:5}
+  const mockChoosenObject=melee[0];
 
-  const specificObject = [
-    {name: 'chainmail', category: 'armor'},{name: 'plate mail', category: 'armor'},{name: 'leather brest plate', category: 'armor'},
-    {name: 'sword', category: 'melee'},{name: 'halbeard', category: 'melee'},{name: 'pike', category: 'melee'},
-    {name: 'bow', category: 'ranged'},{name: 'crossbow', category: 'ranged'},{name: 'slinger', category: 'ranged'}
-  ];
+  // merge all arrays with items into one.
+  const specificObject = melee.concat(ranged,armor,clothes);
 
   var randomIndex = 0;
 
-  const itemsReadyToDraw = [{name: 'plate mail'}];
-  const itemThatHasBeenDrawn = [{name: 'plate mail'}];
+  const itemsReadyToDraw = [melee[0]];
+  const itemThatHasBeenDrawn = [melee[0]];
   const historyOfDrawnedItems = [];
 
   const [ChoosenObject, setChoosenObject] = useState(mockChoosenObject)
@@ -120,10 +107,12 @@ function App() {
             />
       </div>
       <div data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
-        <ui5-card  heading="Informacje o wybranych przedmiocie" subheading={ChoosenObject.name} className="medium">
-      	  <div class="card-content">
+        <ui5-card  heading="Informacje o wybranym przedmiocie" subheading={ChoosenObject.name.toUpperCase()} className="medium">
+        
+      	  <div className="card-content">
             <ui5-list mode="None" separators="None" className="card-content-child"  style={{height: '500px'}} growing="Scroll">
-              {Object.entries(ChoosenObject).map(value => <ui5-li type="Inactive" infoState="Success" description={value[0]} info={value[1]}></ui5-li>)}
+            
+              {Object.entries(ChoosenObject).map(value => <ui5-li type="Inactive">{value[0].toUpperCase()} : {value[1].charAt(0) === "/" ? <ui5-avatar image={ChoosenObject.image} ></ui5-avatar> : value[1]}</ui5-li>)}
             </ui5-list>
           </div>
         </ui5-card>
@@ -135,12 +124,13 @@ function App() {
               height: '600px'
             }} 
             layout={layoutChooseItems} startColumn={<>
-              <List headerText="Kategorie przedmiotów do losowania" onItemClick={onCategoryItemClick}>
+              <List headerText="Kategorie przedmiotów do losowania"  onItemClick={onCategoryItemClick}>
               {/* <List headerText="Kategorie przedmiotów do losowania" onItemClick={() => {
                   setChooseItemsLayout(FCLLayout.TwoColumnsMidExpanded);
               }}> */}
-                {objectCategory.map(item => <StandardListItem description={`Quantity:  ${objectCategory.length}`} data-name={item.name} data-category={item.category}>
+                {objectCategory.map(item => <StandardListItem description={`Quantity:  ${specificObject.filter(x => x.category === item.category).length}`} data-name={item.name} image={item.image} data-category={item.category}>
                   {item.name}
+                 
                 </StandardListItem>)}
               </List>
             </>} midColumn={<>
@@ -148,19 +138,17 @@ function App() {
                 
                 <Title>{selectedObjectCategory.name}</Title>
                 <ToolbarSpacer />
-                {/* <ui5-button design="Negative"  onClick={()  => setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name === 12345 ))}>
-                  wybierz wszystkie
-                </ui5-button> */}
-                <ToolbarSpacer />
+
                 <Button icon="decline" design={ButtonDesign.Transparent} onClick={() => {
                   setChooseItemsLayout(FCLLayout.OneColumn);
                 }} />
                 
               </Toolbar>
-              <List id="itemsToDrawList" headerText="Przedmioty" mode="SingleSelect" onItemClick={(item) => {setSelectedItemsReadyToDraw([...selectedItemsReadyToDraw,{name: `${item.detail.item.dataset.name}`}]);console.log(item.detail.item.dataset.name, selectedItemsReadyToDraw)}}>
+              <List id="itemsToDrawList" headerText="Przedmioty" mode="SingleSelect" onItemClick={(item) => setSelectedItemsReadyToDraw([...selectedItemsReadyToDraw,{name: `${item.detail.item.dataset.name}`}])}>
                 {specificObject.filter(item => item.category === selectedObjectCategory.category).map(item => 
-                <StandardListItem data-name={item.name}>
-                  {item.name}
+                <StandardListItem data-name={item.name} image={item.image}>
+                  {item.name.toUpperCase()}
+                  
                 </StandardListItem>)}
               </List>
             </>}           
@@ -188,13 +176,8 @@ function App() {
               <div>
               <Toolbar design={ToolbarDesign.Solid}>
                 <Title>Lista przedmiotów losowanych</Title>
-                <ToolbarSpacer/>
-                <Button icon="add" design={ButtonDesign.Transparent} onClick={() => {
-                  setDrawItemsLayout(FCLLayout.TwoColumnsMidExpanded);
-                }}/>
               </Toolbar>
               <ui5-button design="Positive" onClick={() => {
-                setDrawItemsLayout(FCLLayout.TwoColumnsMidExpanded);
                 randomIndex = Math.floor(Math.random() * (selectedItemsReadyToDraw.length));
                 selectedItemsReadyToDraw.length > 0 ?
                 setSelectedItemThatHasBeenDrawn(
@@ -211,11 +194,11 @@ function App() {
               <List mode="None" onItemClick={object => {setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name !== object.detail.item.innerText))}}>
                 {selectedItemsReadyToDraw.map(item => 
                 <StandardListItem description="kliknij aby usunąć">
-                  {item.name}
+                  {item.name.charAt(0).toUpperCase()+item.name.slice(1)}
                 </StandardListItem >)}
                 </List>
               </div>}
-            midColumn={<></>}
+           
           />
         </div>
       </Grid>
