@@ -63,16 +63,16 @@ function App() {
         primary-title="Random Loot Generator 3.0 for Warhammer 2ed."
         secondary-title="author: Bartosz Dudek"
       ></ui5-shellbar>
-      <Grid defaultSpan="XL12 L12 M12 S12" style={{ padding: 10, margin: 5 }}>
+      <Grid className="appBackground" defaultSpan="XL12 L12 M12 S12" style={{ padding: 10 }}>
         <div data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
-          <FlexibleColumnLayout className='oldBackground'
+          <FlexibleColumnLayout className='divsBacckground'
               style={{
                 height: '600px'
               }} 
               layout={layoutHistoryOfDrawnItems} 
               startColumn={<> 
                 <Toolbar>
-                <Title className='oldBackground'>Obecnie wylosowane przedmioty</Title> 
+                <Title className='titleDescriptor'>Obecnie wylosowane przedmioty</Title> 
                 <ToolbarSpacer/>
                 <Button icon="add" design={ButtonDesign.Transparent} onClick={() => {
                    setHistoryOfDrawnItemsLayout(FCLLayout.TwoColumnsMidExpanded);
@@ -88,10 +88,10 @@ function App() {
               </>} 
               midColumn={<>
                 <Toolbar>
-                <Title>Historia Wylosowanych Przedmiotów</Title> 
+                <Title className='titleDescriptor'>Historia Wylosowanych Przedmiotów</Title> 
                 <ToolbarSpacer/>
                 <button className="actionButton buttonRemove" onClick={() => setSelectedHistoryOfDrawnedItems(selectedHistoryOfDrawnedItems.filter(item => item.name === 12345 ))}>
-                  Oczyść listę
+                <span className='buttonText'> Oczyść listę</span>
                 </button>
                 <Button icon="decline" design={ButtonDesign.Transparent} onClick={() => {
                   setHistoryOfDrawnItemsLayout(FCLLayout.OneColumn);
@@ -104,39 +104,49 @@ function App() {
                       
                     </StandardListItem>)}
                 </List>
-                </>}           
-            />
+              </>}           
+          />
       </div>
-      <div className='oldBackground' data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
-        <ui5-card className='oldBackground' heading="Informacje o wybranym przedmiocie"  subheading={ChoosenObject.name.toUpperCase()}>
+      <div className='divsBacckground' data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
+      <FlexibleColumnLayout className='divsBacckground'
+        style={{
+          height: '600px'
+        }} 
+        layout={FCLLayout.OneColumn} 
+        startColumn={<>
         
-      	  <div className='oldBackground'>
-            <ui5-list  mode="None" separators="None"  style={{height: '500px'}} growing="Scroll">
-              {Object.entries(ChoosenObject).map(value => <ui5-li type="Inactive"><span className='itemPropDescriptor'>{value[0].toUpperCase()}</span> : { value[1].charAt(0) === "/" ? <ui5-avatar image={ChoosenObject.image} ></ui5-avatar> : <span className='itemPropName'>{value[1]}</span>}</ui5-li>)}
-            </ui5-list>
-          </div>
-        </ui5-card>
+        <Toolbar>
+          <Title className='titleDescriptor'>Informacje o wybranym przedmiocie</Title> 
+        </Toolbar>
+        <ui5-list  mode="None" separators="None"  style={{height: '500px'}} growing="Scroll">
+          {Object.entries(ChoosenObject).map(value => <ui5-li type="Inactive"><span className='itemPropDescriptor'>{value[0].toUpperCase()}</span> : { value[1].charAt(0) === "/" ? <ui5-avatar image={ChoosenObject.image} ></ui5-avatar> : <span className='itemPropName'>{value[1]}</span>}</ui5-li>)}
+        </ui5-list>
+       
+        </>} 
+        />
       </div>
 
         <div data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
-          <FlexibleColumnLayout 
+          <FlexibleColumnLayout className='divsBacckground'
             style={{
               height: '600px'
             }} 
             layout={layoutChooseItems} startColumn={<>
-              <List headerText="Kategorie przedmiotów do losowania"  onItemClick={onCategoryItemClick}>
-              {/* <List headerText="Kategorie przedmiotów do losowania" onItemClick={() => {
-                  setChooseItemsLayout(FCLLayout.TwoColumnsMidExpanded);
-              }}> */}
+              <Toolbar>
+              <Title className='titleDescriptor'>Kategorie przedmiotów do losowania</Title>
+               </Toolbar>
+              
+              <List onItemClick={onCategoryItemClick}>
+            
                 {objectCategory.map(item => <StandardListItem description={`Quantity:  ${specificObject.filter(x => x.category === item.category).length}`} data-name={item.name} image={item.image} data-category={item.category}>
-                  {item.name}
-                 
+                  <span className='itemPropName'>{item.name}</span>
+                
                 </StandardListItem>)}
               </List>
             </>} midColumn={<>
               <Toolbar>
                 
-                <Title>{selectedObjectCategory.name}</Title>
+                <Title className='titleDescriptor'>{selectedObjectCategory.name}</Title>
                 <ToolbarSpacer />
 
                 <Button icon="decline" design={ButtonDesign.Transparent} onClick={() => {
@@ -144,9 +154,10 @@ function App() {
                 }} />
                 
               </Toolbar>
-              <List id="itemsToDrawList" headerText="Przedmioty" mode="SingleSelect" onItemClick={(item) => setSelectedItemsReadyToDraw([...selectedItemsReadyToDraw,{name: `${item.detail.item.dataset.name}`}])}>
+              <List id="itemsToDrawList" mode="SingleSelect" onItemClick={(item) => setSelectedItemsReadyToDraw([...selectedItemsReadyToDraw,{name: `${item.detail.item.dataset.name}`}])}>
                 {specificObject.filter(item => item.category === selectedObjectCategory.category).map(item => 
                 <StandardListItem data-name={item.name} image={item.image}>
+                  
                   {item.name.toUpperCase()}
                   
                 </StandardListItem>)}
@@ -164,7 +175,7 @@ function App() {
                 </>}/>
         </div>      
         <div data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
-          <FlexibleColumnLayout
+          <FlexibleColumnLayout className='divsBacckground'
             
             style={{
               height: '600px'
@@ -175,7 +186,7 @@ function App() {
             startColumn={
               <div>
               <Toolbar>
-                <Title>Lista przedmiotów losowanych</Title>
+                <Title  className='titleDescriptor'>Lista przedmiotów losowanych</Title>
               </Toolbar>
               <button className="actionButton buttonRollDiece" design="Positive" onClick={() => {
                 randomIndex = Math.floor(Math.random() * (selectedItemsReadyToDraw.length));
@@ -186,10 +197,10 @@ function App() {
                 :  setSelectedItemThatHasBeenDrawn([]);
                 setSelectedHistoryOfDrawnedItems([...selectedHistoryOfDrawnedItems,...selectedItemThatHasBeenDrawn])
               }}>
-              Losuj przedmiot
+              <span className='buttonText'>Losuj przedmiot</span>
               </button>
               <button className="actionButton buttonRemove"  onClick={()  => setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name === 12345 ))}>
-                Oczyść listę
+              <span className='buttonText'>Oczyść listę</span>
               </button>
               <List mode="None" onItemClick={object => { console.log(object, selectedItemsReadyToDraw); setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name !== object.detail.item.innerText))}}>
                 {selectedItemsReadyToDraw.map(item => 
