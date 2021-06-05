@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { FlexibleColumnLayout, List, StandardListItem,  Title,  Grid, FCLLayout, Toolbar, ToolbarDesign, ToolbarSpacer, Button, ButtonDesign } from '@ui5/webcomponents-react';
+import { FlexibleColumnLayout, List, StandardListItem,  Title,  Grid, FCLLayout, Toolbar,  ToolbarSpacer, Button, ButtonDesign } from '@ui5/webcomponents-react';
 // import { setTheme } from '@ui5/webcomponents-base/dist/config/Theme';
-import  { melee, ranged, armor, potion, general, treasure, food, clothes, tools } from './itemsVault';
+import  { melee, ranged, armor, clothes } from './itemsVault';
 import "@ui5/webcomponents/dist/Assets.js";
 import "@ui5/webcomponents-fiori/dist/Assets.js"; //  if you use @ui5/webcomponents-fiori
 import { setTheme } from "@ui5/webcomponents-base/dist/config/Theme.js";
@@ -81,7 +81,7 @@ function App() {
                 <List style={{height: '400px'}} growing="Scroll">
                   {selectedItemThatHasBeenDrawn.map(item => 
                     <StandardListItem description="kliknij aby zobaczyć szczegóły" onClick={() => setChoosenObject(specificObject.filter(x => x.name === item.name)[0])}> 
-                      {item.name}
+                      <p className='itemName drawnItem'>{item.name}</p>
                     </StandardListItem >
                   )}
                 </List>
@@ -90,9 +90,9 @@ function App() {
                 <Toolbar>
                 <Title>Historia Wylosowanych Przedmiotów</Title> 
                 <ToolbarSpacer/>
-                <ui5-button design="Negative" onClick={() => setSelectedHistoryOfDrawnedItems(selectedHistoryOfDrawnedItems.filter(item => item.name === 12345 ))}>
+                <button className="actionButton buttonRemove" onClick={() => setSelectedHistoryOfDrawnedItems(selectedHistoryOfDrawnedItems.filter(item => item.name === 12345 ))}>
                   Oczyść listę
-                </ui5-button>
+                </button>
                 <Button icon="decline" design={ButtonDesign.Transparent} onClick={() => {
                   setHistoryOfDrawnItemsLayout(FCLLayout.OneColumn);
                 }}/>
@@ -100,7 +100,8 @@ function App() {
                 <List style={{height: '400px'}} growing="Scroll">
                   {selectedHistoryOfDrawnedItems.map(item => 
                     <StandardListItem description="kliknij aby zobaczyć szczegóły" onClick={() => setChoosenObject(specificObject.filter(x => x.name === item.name)[0])}>
-                      {item.name}
+                      <p className='itemNameHistoryItem'>{item.name}</p>
+                      
                     </StandardListItem>)}
                 </List>
                 </>}           
@@ -111,8 +112,7 @@ function App() {
         
       	  <div className='oldBackground'>
             <ui5-list  mode="None" separators="None"  style={{height: '500px'}} growing="Scroll">
-            
-              {Object.entries(ChoosenObject).map(value => <ui5-li type="Inactive">{value[0].toUpperCase()} : {value[1].charAt(0) === "/" ? <ui5-avatar image={ChoosenObject.image} ></ui5-avatar> : value[1]}</ui5-li>)}
+              {Object.entries(ChoosenObject).map(value => <ui5-li type="Inactive"><span className='itemPropDescriptor'>{value[0].toUpperCase()}</span> : { value[1].charAt(0) === "/" ? <ui5-avatar image={ChoosenObject.image} ></ui5-avatar> : <span className='itemPropName'>{value[1]}</span>}</ui5-li>)}
             </ui5-list>
           </div>
         </ui5-card>
@@ -177,7 +177,7 @@ function App() {
               <Toolbar>
                 <Title>Lista przedmiotów losowanych</Title>
               </Toolbar>
-              <ui5-button design="Positive" onClick={() => {
+              <button className="actionButton buttonRollDiece" design="Positive" onClick={() => {
                 randomIndex = Math.floor(Math.random() * (selectedItemsReadyToDraw.length));
                 selectedItemsReadyToDraw.length > 0 ?
                 setSelectedItemThatHasBeenDrawn(
@@ -187,14 +187,15 @@ function App() {
                 setSelectedHistoryOfDrawnedItems([...selectedHistoryOfDrawnedItems,...selectedItemThatHasBeenDrawn])
               }}>
               Losuj przedmiot
-              </ui5-button>
-              <ui5-button design="Negative"  onClick={()  => setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name === 12345 ))}>
+              </button>
+              <button className="actionButton buttonRemove"  onClick={()  => setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name === 12345 ))}>
                 Oczyść listę
-              </ui5-button>
-              <List mode="None" onItemClick={object => {setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name !== object.detail.item.innerText))}}>
+              </button>
+              <List mode="None" onItemClick={object => { console.log(object, selectedItemsReadyToDraw); setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name !== object.detail.item.innerText))}}>
                 {selectedItemsReadyToDraw.map(item => 
                 <StandardListItem description="kliknij aby usunąć">
-                  {item.name.charAt(0).toUpperCase()+item.name.slice(1)}
+                   {/* currently, displayed text should not by modified. If, for example, it would be UpperCased (even if only first letter), function that is responsible for removing this particular object from list, won't work. */}
+                  <p className='itemName'>{item.name}</p>
                 </StandardListItem >)}
                 </List>
               </div>}

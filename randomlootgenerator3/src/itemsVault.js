@@ -15,7 +15,17 @@
 
       whiteWolfHammer,
       orcChoppa,
-      greatWarhammer
+      greatWarhammer,
+
+      
+    } from './img'
+
+    import {
+      fullStuddedLeather,
+      studdedJack,
+      studdedJerkin,
+      studdedLeggins,
+      studdedSkullcap
     } from './img'
   
   
@@ -114,78 +124,58 @@
 
   export const armor = 
  [
-  {name:"leather skullcap", value:"3 gc", category:'armor', location:"head", armor:1 },
-  {name:"leather jerkin", value:"6 gc",category:'armor',  location:"body", armor:1},
-  {name:"leather jack", value:"12 gc", category:'armor', location:"body, arms", armor:1},
-  {name:"leather leggings", value:"10 gc", category:'armor', location:"legs", armor:1},
-  {name:"full leather", value:"25 gc", category:'armor', location:"all", armor:1},
+  {name:"leather skullcap", value:"3 gc", category:'armor', location:"head", armor:'1' },
+  {name:"leather jerkin", value:"6 gc",category:'armor',  location:"body", armor:'1'},
+  {name:"leather jack", value:"12 gc", category:'armor', location:"body, arms", armor:'1'},
+  {name:"leather leggings", value:"10 gc", category:'armor', location:"legs", armor:'1'},
+  {name:"full leather", value:"25 gc", category:'armor', location:"all", armor:'1'},
 
-  {name:"studded skullcap", value:"10 gc", category:'armor', location:"head", armor:1},
-  {name:"studded jerkin", value:"20 gc",category:'armor',  location:"body", armor:1},
-  {name:"studded jack", value:"30 gc",category:'armor',  location:"body, arms", armor:1},
-  {name:"studded leggins", value:"120 gc",category:'armor',  location:"legs", armor:1},
-  {name:"full studded leather", value:"90 gc",category:'armor',  location:"all", armor:2},
+  {name:"studded skullcap", image:studdedSkullcap, value:"10 gc", category:'armor', location:"head", armor:'1'},
+  {name:"studded jerkin", image:studdedJerkin, value:"20 gc",category:'armor',  location:"body", armor:'1'},
+  {name:"studded jack", image:studdedJack, value:"30 gc",category:'armor',  location:"body, arms", armor:'1'},
+  {name:"studded leggins", image:studdedLeggins, value:"120 gc",category:'armor',  location:"legs", armor:'1'},
+  {name:"full studded leather", image: fullStuddedLeather, value:"90 gc",category:'armor',  location:"all", armor:'2'},
 
-  {name:"mail coif", value:"20 gc",category:'armor',  location:"head", armor:2},
-  {name:"mail shirt", value:"60 gc", category:'armor', location:"body", armor:2},
-  {name:"sleved mail shirt", value:"95 gc", category:'armor', location:"body, arms", armor:2},
-  {name:"mail coat", value:"75 gc", category:'armor', location:"body, legs", armor:2},
-  {name:"sleeved mail coat", value:"130 gc",category:'armor',  location:"body, arms, legs", armor:2},
-  {name:"mail leggings", value:"20 gc",category:'armor' , location:"legs", armor:2},
-  {name:"full mail armor", value:"170 gc",category:'armor',  location:"all", armor:3},
+  {name:"mail coif", value:"20 gc",category:'armor',  location:"head", armor:'2'},
+  {name:"mail shirt", value:"60 gc", category:'armor', location:"body", armor:'2'},
+  {name:"sleved mail shirt", value:"95 gc", category:'armor', location:"body, arms", armor:'2'},
+  {name:"mail coat", value:"75 gc", category:'armor', location:"body, legs", armor:'2'},
+  {name:"sleeved mail coat", value:"130 gc",category:'armor',  location:"body, arms, legs", armor:'2'},
+  {name:"mail leggings", value:"20 gc",category:'armor' , location:"legs", armor:'2'},
+  {name:"full mail armor", value:"170 gc",category:'armor',  location:"all", armor:'3'},
 
-  {name:"scale coif", value:"30 gc",category:'armor',  location:"head", armor:3},
-  {name:"scale shirt", value:"150 gc",category:'armor',  location:"body", armor:3},
-  {name:"sleeved scale shirt", value:"225 gc", category:'armor', location:"body, arms", armor:3},
-  {name:"scale coat", value:"225 gc",category:'armor',  location:"body, legs", armor:3},
-  {name:"sleeved scale coart", value:"300 gc", category:'armor', location:"body, arms, legs", armor:3},
-  {name:"scale leggings", value:"75 gc",category:'armor',  location:"legs", armor:3},
-  {name:"full scale armor", value:"360 gc",category:'armor',  location:"all", armor:4},
+  {name:"scale coif", value:"30 gc",category:'armor',  location:"head", armor:'3'},
+  {name:"scale shirt", value:"150 gc",category:'armor',  location:"body", armor:'3'},
+  {name:"sleeved scale shirt", value:"225 gc", category:'armor', location:"body, arms", armor:'3'},
+  {name:"scale coat", value:"225 gc",category:'armor',  location:"body, legs", armor:'3'},
+  {name:"sleeved scale coart", value:"300 gc", category:'armor', location:"body, arms, legs", armor:'3'},
+  {name:"scale leggings", value:"75 gc",category:'armor',  location:"legs", armor:'3'},
+  {name:"full scale armor", value:"360 gc",category:'armor',  location:"all", armor:'4'},
 
-  {name:"plate helmet", value:"30 gc",category:'armor',  location:"head", armor:2},
-  {name:"brestplate", value:"70 gc", category:'armor', location:"body", armor:2},
-  {name:"plate bracers", value:"60 gc",category:'armor',  location:"arms", armor:2},
-  {name:"plate leggings", value:"70 gc",category:'armor',  location:"legs", armor:2},
-  {name:"full plate armor", value:"400 gc",category:'armor',  location:"armor", armor:5},
+  {name:"plate helmet", value:"30 gc",category:'armor',  location:"head", armor:'2'},
+  {name:"brestplate", value:"70 gc", category:'armor', location:"body", armor:'2'},
+  {name:"plate bracers", value:"60 gc",category:'armor',  location:"arms", armor:'2'},
+  {name:"plate leggings", value:"70 gc",category:'armor',  location:"legs", armor:'2'},
+  {name:"full plate armor", value:"400 gc",category:'armor',  location:"armor", armor:'5'},
 
-  {name:"ithilmar main coif", value:"???",category:'armor',  location:"head", armor:3},
-  {name:"ithilmar mail shirt", value:"???",category:'armor',  location:"body", armor:3},
-  {name:"ithilmar sleeved shirt", value:"???",category:'armor',  location:"body, arms", armor:3},
-  {name:"ithilmar mail coat", value:"???",category:'armor',  location:"body, legs", armor:3},
-  {name:"ithilmar sleeved mail coat", value:"???",category:'armor',  location:"body, arms, legs", armor:3},
-  {name:"ithilmar mail leggings", value:"???", category:'armor', location:"body legs", armor:3},
-  {name:"ithilmar full mail armor", value:"???",category:'armor',  location:"all", armor:4},
+  {name:"ithilmar main coif", value:"???",category:'armor',  location:"head", armor:'3'},
+  {name:"ithilmar mail shirt", value:"???",category:'armor',  location:"body", armor:'3'},
+  {name:"ithilmar sleeved shirt", value:"???",category:'armor',  location:"body, arms", armor:'3'},
+  {name:"ithilmar mail coat", value:"???",category:'armor',  location:"body, legs", armor:'3'},
+  {name:"ithilmar sleeved mail coat", value:"???",category:'armor',  location:"body, arms, legs", armor:'3'},
+  {name:"ithilmar mail leggings", value:"???", category:'armor', location:"body legs", armor:'3'},
+  {name:"ithilmar full mail armor", value:"???",category:'armor',  location:"all", armor:'4'},
 
-  {name:"gromril helmet", value:"???", category:'armor', location:"head", armor:3},
-  {name:"gromril brestplate", value:"???",category:'armor',  location:"body", armor:3},
-  {name:"gromril plate bracers", value:"???",category:'armor',  location:"arms", armor:3},
-  {name:"gromril plate leggings", value:"???",category:'armor',  location:"legs", armor:3},
-  {name:"gromril full plate", value:"???", category:'armor', location:"armor", armor:6},
+  {name:"gromril helmet", value:"???", category:'armor', location:"head", armor:'3'},
+  {name:"gromril brestplate", value:"???",category:'armor',  location:"body", armor:'3'},
+  {name:"gromril plate bracers", value:"???",category:'armor',  location:"arms", armor:'3'},
+  {name:"gromril plate leggings", value:"???",category:'armor',  location:"legs", armor:'3'},
+  {name:"gromril full plate", value:"???", category:'armor', location:"armor", armor:'6'},
 
-  {name:"chaos armor", value:"???", category:'armor', location:"armor", armor:5},
-
- ]
-
- export const potion = 
- [
-  {name:"potions are comming soon"},
+  {name:"chaos armor", value:"???", category:'armor', location:"armor", armor:'5'},
 
  ]
- export const general = 
- [
-  {name:"general eq is comming soon"},
 
- ]
- export const treasure = 
- [
-  {name:"treasures are comming soon"},
-
- ]
- export const food = 
- [
-  {name:" food is comming soon"},
-
- ]
  export const clothes = 
  [
   {name:"apron", category:'clothes', value:"5 p" },
@@ -227,10 +217,5 @@
   {name:"shoes",category:'clothes', value:"26 s" },
  ]
 
- export const tools = 
- [
-  {name:"tools are comming soon",},
-
- ]
 
 

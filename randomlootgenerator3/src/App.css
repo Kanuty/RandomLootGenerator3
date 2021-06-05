@@ -25,10 +25,92 @@ ui5-li, .card-content{
   border: 1px solid var(--light-color);
   border-radius: 10px;
   box-shadow: 0 2px 2px var(--shadow-color);
-  flex-direction: column;
-  margin: 4px;
-  padding: 2px;
-  text-align: center;
   
+  flex-direction: column;
+  margin: 6px;
+  padding: 4px;
+  text-align: center;
 }
+
+ui5-avatar{
+  padding:10px;
+}
+.itemName{
+  font-size: 20px;
+  margin: 5px;
+  padding:5px;
+  color: rgb(218, 245, 248);
+  text-shadow: 0 0 5px #16b3e2;
+  font-family:fantasy
+}
+.itemPropDescriptor{
+  font-family:fantasy;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 5px #aeb10c;
+}
+.itemPropName{
+  font-family:fantasy;
+  color: rgb(218, 245, 248);
+  text-shadow: 0 0 5px #16b3e2;
+}
+.itemNameHistoryItem{
+  font-size: 20px;
+  margin: 5px;
+  padding:5px;
+  color: rgb(252, 250, 233);
+  text-shadow: 0 0 5px #ffb908;
+  text-transform: capitalize;
+  font-family:fantasy
+}
+.drawnItem{
+  text-transform: capitalize;
+}
+
+.actionButton{
+  background-color: var(--main-color);
+  border-radius: 10px;
+  border: 1px solid var(--light-color);
+  cursor: pointer;
+  font-size: 30px;
+  font-family: "Georgia",serif;
+  height: 60px;
+  margin: 10px;
+  padding-top: 1px;
+  -webkit-transition: background-color .3s;
+  transition: background-color .3s;
+  width: 98%;
+}
+
+.actionButton:disabled{
+  background-color: var(--dark-color);
+  text-shadow: 1px 1px 2px var(--strong-highlight-color);
+  color: var(--main-color);
+  cursor: default;
+}
+ .buttonRemove{
+  box-shadow: 0 2px 2px var(--shadow-color);
+  color: #fac3c3;
+  text-shadow: 0 0 5px #ff1100;
+}
+
+.buttonRemove:active{
+  background-color: var(--highlight-color);
+  border-style: inset;
+  text-shadow: 0 0 5px #fd4d0c;
+}
+
+.buttonRollDiece{
+  box-shadow: 0 2px 2px var(--shadow-color);
+  color: #cffac6;
+  text-shadow: 0 0 5px #06ee0e;
+}
+
+.buttonRollDiece:active{
+  background-color: var(--highlight-color);
+  border-style: inset;
+  text-shadow: 0 0 5px #01d6e6;
+}
+
+
+
 
