@@ -12,12 +12,24 @@
       tileanPike,
       woodElfHuntingSpear,
       militaryPick,
-
       whiteWolfHammer,
       orcChoppa,
       greatWarhammer,
+    } from './img'
 
-      
+
+    import{
+      bomb,
+      bow,
+      crossbow,
+      elfbow,
+      hochlandLongRifle,
+      jevelin,
+      longbow,
+      pistol,
+      repeterCrossbow,
+      throwingAxe,
+      trowingDagger
     } from './img'
 
     import {
@@ -27,6 +39,8 @@
       studdedLeggins,
       studdedSkullcap
     } from './img'
+
+
   
   
   export const melee = 
@@ -76,33 +90,33 @@
   export const ranged = 
  [
   {name:"bola", category:'ranged',value:"7 s", group:"entangling", power:"1", range:"8/16", reload:"half", qualities:"snare"},
-  {name:"bow",category:'ranged', value:"10 gc", group:"ordinary", power:"3", range:"24/48", reload:"half", qualities:"none"},
-  {name:"crossbow",category:'ranged', value:"25 gc", group:"crossbow", power:"4", range:"30/60", reload:"full",qualities:"none"},
-  {name:"crossbow pistol",category:'ranged', value:"35 g", group:"crossbow", power:"2", range:"8/16", reload:"full", qualities:"none"},
-  {name:"elfbow",category:'ranged', value:"70 gc", group:"longbow", power:"3", range:"36/72", reload:"half", qualities:"armor piercing"},
-  {name:"jevelin",category:'ranged', value:"25 s", group:"ordinary", power:"S-1", range:"8/16", reload:"half", qualities:"none"},
+  {name:"bow", image:bow, category:'ranged', value:"10 gc", group:"ordinary", power:"3", range:"24/48", reload:"half", qualities:"none"},
+  {name:"crossbow", image:crossbow,category:'ranged', value:"25 gc", group:"crossbow", power:"4", range:"30/60", reload:"full",qualities:"none"},
+  {name:"crossbow pistol", image:repeterCrossbow, category:'ranged', value:"35 g", group:"crossbow", power:"2", range:"8/16", reload:"full", qualities:"none"},
+  {name:"elfbow", image:elfbow, category:'ranged', value:"70 gc", group:"longbow", power:"3", range:"36/72", reload:"half", qualities:"armor piercing"},
+  {name:"jevelin", image:jevelin, category:'ranged', value:"25 s", group:"ordinary", power:"S-1", range:"8/16", reload:"half", qualities:"none"},
   {name:"lasso",category:'ranged', value:"1 gc", group:"entangling", power:"n/a", range:"8/-", reload:"half", qualities:"snare"},
-  {name:"longbow",category:'ranged', value:"15 gc", group:"longbow", power:"3", range:"30/60", reload:"half", qualities:"armor piercing"},
+  {name:"longbow",  image:longbow, category:'ranged', value:"15 gc", group:"longbow", power:"3", range:"30/60", reload:"half", qualities:"armor piercing"},
   {name:"net",category:'ranged', value:"3 gc", group:"entagling", power:"n/a", range:"4/8", reload:"full", qualities:"snare"},
-  {name:"repeter crossbow",category:'ranged', value:"100 gc", group:"crossbow", power:"2", range:"16/32", reload:"free", qualities:"special"},
+  {name:"repeter crossbow", image:repeterCrossbow, category:'ranged', value:"100 gc", group:"crossbow", power:"2", range:"16/32", reload:"free", qualities:"special"},
   {name:"shortbow",category:'ranged', value:"7 gc", group:"ordinary", power:"3", range:"16/32", reload:"half", qualities:"none"},
   {name:"sling",category:'ranged', value:"4 gc", group:"sling", power:"3", range:"16/32", reload:"half", qualities:"none"},
   {name:"spear",category:'ranged', value:"10 gc", group:"ordinary", power:"S", range:"8/-", reload:"half", qualities:"none"},
   {name:"staff sling",category:'ranged', value:"6 gc", group:"sling", power:"4", range:"24/48", reload:"full", qualities:"none"},
-  {name:"throwing axe",category:'ranged', value:"5 gc", group:"throwing", power:"S-2", range:"8/-", reload:"half", qualities:"none"},
+  {name:"throwing axe", image: throwingAxe, category:'ranged', value:"5 gc", group:"throwing", power:"S-2", range:"8/-", reload:"half", qualities:"none"},
   {name:"throwing hammer",category:'ranged', value:"5 gc", group:"throwing", power:"S-2", range:"8/-", reload:"half", qualities:"none"},
-  {name:"throwing dagger",category:'ranged', value:"3 gc", group:"throwing", power:"S-3", range:"6/12", reload:"half", qualities:"none"},
+  {name:"throwing dagger", image: trowingDagger, category:'ranged', value:"3 gc", group:"throwing", power:"S-3", range:"6/12", reload:"half", qualities:"none"},
   {name:"throwing star",category:'ranged', value:"3 gc", group:"throwing", power:"S-3", range:"6/12", reload:"half", qualities:"none"},
 
 //gunpowder weapons
   {name:"blunderbuss",category:'ranged', value:"70 gc", group:"gunpowder", power:"3", range:"32/-", reload:"3 full", qualities:"shrapnel, unreliable"},
-  {name:"bomb",category:'ranged', value:"75 gc", group:"explosive", power:"6", range:"4/20", reload:"are you serious?", qualities:"unreliable"},
+  {name:"bomb", image:bomb,category:'ranged', value:"75 gc", group:"explosive", power:"6", range:"4/20", reload:"are you serious?", qualities:"unreliable"},
   {name:"duck-foot",category:'ranged', value:"500 gc", group:"engineer", power:"3", range:"16/-", reload:"4 full", qualities:"special, experimental"},
   {name:"firearm",category:'ranged', value:"300 gc", group:"gunpowder", power:"4", range:"24/48", reload:"2 full", qualities:"impact, unreliable"},
-  {name:"hochland long rifle",category:'ranged', value:"450 gc", group:"engineer", power:"4", range:"48/96", reload:"2 full", qualities:"impact, unreliable"},
+  {name:"hochland long rifle", image:hochlandLongRifle, category:'ranged', value:"450 gc", group:"engineer", power:"4", range:"48/96", reload:"2 full", qualities:"impact, unreliable"},
   {name:"incendentary",category:'ranged', value:"5 gc", group:"explosive", power:"4", range:"4/10", reload:"full + half", qualities:"special"},
   {name:"jezzail",category:'ranged', value:"??? ", group:"gunpowder", power:"3", range:"24/72", reload:"2 full", qualities:"none"},
-  {name:"pistol",category:'ranged', value:"200 gc", group:"gunpowder", power:"4", range:"8/16", reload:"2 full", qualities:"impact, unreliable"},
+  {name:"pistol", image:pistol, category:'ranged', value:"200 gc", group:"gunpowder", power:"4", range:"8/16", reload:"2 full", qualities:"impact, unreliable"},
   {name:"repeater handgun",category:'ranged', value:"600 gc", group:"engineer", power:"4", range:"24/48", reload:"free", qualities:"experimental, special"},
   {name:"repeater pistol", category:'ranged',value:"400 gc", group:"engineer", power:"4", range:"8/16", reload:"2 full", qualities:"experimental, special"},
 

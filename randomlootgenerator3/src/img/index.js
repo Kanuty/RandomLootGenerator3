@@ -25,6 +25,18 @@ import studdedJerkin from './armor/studdedJerkin.png';
 import studdedLeggins from './armor/studdedLeggins.png';
 import studdedSkullcap from './armor/studdedSkullcap.png';
 
+import bomb  from './ranged/bomb.png';
+import bow from './ranged/bow.png';
+import crossbow from './ranged/crossbow.png';
+import elfbow from './ranged/elfbow.png';
+import hochlandLongRifle from './ranged/hochlandLongRifle.png';
+import jevelin from './ranged/jevelin.png';
+import longbow from './ranged/longbow.png';
+import pistol from './ranged/pistol.png';
+import repeterCrossbow from './ranged/repeterCrossbow.png';
+import throwingAxe from './ranged/throwingAxe.png';
+import trowingDagger from './ranged/trowingDagger.png';
+
 export {
   armorImg,
   meleeImg,
@@ -52,5 +64,17 @@ export {
   studdedJack,
   studdedJerkin,
   studdedLeggins,
-  studdedSkullcap
+  studdedSkullcap,
+
+  bomb,
+  bow,
+  crossbow,
+  elfbow,
+  hochlandLongRifle,
+  jevelin,
+  longbow,
+  pistol,
+  repeterCrossbow,
+  throwingAxe,
+  trowingDagger
 };

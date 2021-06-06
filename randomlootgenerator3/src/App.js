@@ -51,11 +51,14 @@ function App() {
   const [selectedItemThatHasBeenDrawn, setSelectedItemThatHasBeenDrawn] = useState(itemThatHasBeenDrawn)
   const [selectedHistoryOfDrawnedItems, setSelectedHistoryOfDrawnedItems] = useState(historyOfDrawnedItems)
 
+  const [quantityOfRolls, setQuantityOfRolls] = useState(1)
+
   const onCategoryItemClick = e => {
     setSelectedObjectCategory(objectCategory.find(item => item.category === e.detail.item.dataset.category));
     setChooseItemsLayout(FCLLayout.TwoColumnsMidExpanded)
   };
-
+ 
+  const  changeInQuanitytOfRolls = e => setQuantityOfRolls(e.target.value)
   
   return (
     <div className="App" >
@@ -189,15 +192,27 @@ function App() {
                 <Title  className='titleDescriptor'>Lista przedmiotów losowanych</Title>
               </Toolbar>
               <button className="actionButton buttonRollDiece" design="Positive" onClick={() => {
-                randomIndex = Math.floor(Math.random() * (selectedItemsReadyToDraw.length));
-                selectedItemsReadyToDraw.length > 0 ?
-                setSelectedItemThatHasBeenDrawn(
-                  [selectedItemsReadyToDraw[randomIndex]]
-                )
-                :  setSelectedItemThatHasBeenDrawn([]);
+                setSelectedItemThatHasBeenDrawn([]);
+                const drawingItems = []
+                if (selectedItemsReadyToDraw.length > 0){
+                  for (let i = 0; i < quantityOfRolls ; i +=1){
+                    drawingItems.push(selectedItemsReadyToDraw[Math.floor(Math.random() * (selectedItemsReadyToDraw.length))])
+                  }
+                  setSelectedItemThatHasBeenDrawn([...drawingItems])
+                }
+                else{ setSelectedItemThatHasBeenDrawn([])};
                 setSelectedHistoryOfDrawnedItems([...selectedHistoryOfDrawnedItems,...selectedItemThatHasBeenDrawn])
               }}>
-              <span className='buttonText'>Losuj przedmiot</span>
+                <span className='buttonText'>Losuj przedmiot</span><br/>
+                <input
+                  className="slider"
+                  type="range"
+                  min="1"
+                  max="10"
+                  value={quantityOfRolls}
+                  onChange={changeInQuanitytOfRolls}
+                />
+                <span class='buttonText'>liczba losowań: {quantityOfRolls}</span>
               </button>
               <button className="actionButton buttonRemove"  onClick={()  => setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name === 12345 ))}>
               <span className='buttonText'>Oczyść listę</span>
