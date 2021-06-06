@@ -62,7 +62,7 @@ function App() {
             startColumn={
               <div>
               <Toolbar>
-                <Title  className='titleDescriptor'>Lista przedmiotów losowanych</Title>
+                <Title  className='titleDescriptor'>List of drawn items</Title>
               </Toolbar>
               <button className="actionButton buttonRollDiece" design="Positive" onClick={() => {
                 setSelectedItemThatHasBeenDrawn([]);
@@ -76,7 +76,7 @@ function App() {
                 else{ setSelectedItemThatHasBeenDrawn([])};
                 setSelectedHistoryOfDrawnedItems([...selectedHistoryOfDrawnedItems,...selectedItemThatHasBeenDrawn])
               }}>
-                <span className='buttonText'>Losuj przedmiot</span><br/>
+                <span className='buttonText'>Draw</span><br/>
                 <input
                   className="slider"
                   type="range"
@@ -85,10 +85,10 @@ function App() {
                   value={quantityOfRolls}
                   onChange={changeInQuanitytOfRolls}
                 />
-                <span class='buttonText'>liczba losowań: {quantityOfRolls}</span>
+                <span class='buttonText'>Quantity of draws: {quantityOfRolls}</span>
               </button>
               <button className="actionButton buttonRemove"  onClick={()  => setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name === 12345 ))}>
-              <span className='buttonText'>Oczyść listę</span>
+              <span className='buttonText'>Clean a list</span>
               </button>
               <List mode="None" onItemClick={object => { console.log(object, selectedItemsReadyToDraw); setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name !== object.detail.item.innerText))}}>
                 {selectedItemsReadyToDraw.map(item => 
@@ -108,7 +108,7 @@ function App() {
         layout={FCLLayout.OneColumn} 
         startColumn={<> 
         <Toolbar>
-          <Title className='titleDescriptor'>Informacje o wybranym przedmiocie</Title> 
+          <Title className='titleDescriptor'>Choosen item information</Title> 
         </Toolbar>
         <ui5-list  mode="None" separators="None"  style={{height: '500px'}} growing="Scroll">
           {Object.entries(ChoosenObject).map(value => <ui5-li type="Inactive"><span className='itemPropDescriptor'>{value[0].toUpperCase()}</span> : { value[1].charAt(0) === "/" ? <ui5-avatar image={ChoosenObject.image} ></ui5-avatar> : <span className='itemPropName'>{value[1]}</span>}</ui5-li>)}
@@ -124,7 +124,7 @@ function App() {
             }} 
             layout={layoutChooseItems} startColumn={<>
               <Toolbar>
-              <Title className='titleDescriptor'>Kategorie przedmiotów do losowania</Title>
+              <Title className='titleDescriptor'>Categories of items to draw</Title>
                </Toolbar>
               <List onItemClick={onCategoryItemClick}>
                 {objectCategory.map(item => 
@@ -166,7 +166,7 @@ function App() {
               layout={layoutHistoryOfDrawnItems} 
               startColumn={<> 
                 <Toolbar>
-                <Title className='titleDescriptor'>Obecnie wylosowane przedmioty</Title> 
+                <Title className='titleDescriptor'>Currently drawn items</Title> 
                 <ToolbarSpacer/>
                 <Button icon="add" design={ButtonDesign.Transparent} onClick={() => {
                    setHistoryOfDrawnItemsLayout(FCLLayout.TwoColumnsMidExpanded);
@@ -182,10 +182,10 @@ function App() {
               </>} 
               midColumn={<>
                 <Toolbar>
-                <Title className='titleDescriptor'>Historia Wylosowanych Przedmiotów</Title> 
+                <Title className='titleDescriptor'>History of drawn items</Title> 
                 <ToolbarSpacer/>
                 <button className="actionButton buttonRemove" onClick={() => setSelectedHistoryOfDrawnedItems(selectedHistoryOfDrawnedItems.filter(item => item.name === 12345 ))}>
-                <span className='buttonText'> Oczyść listę</span>
+                <span className='buttonText'> Clear a list</span>
                 </button>
                 <Button icon="decline" design={ButtonDesign.Transparent} onClick={() => {
                   setHistoryOfDrawnItemsLayout(FCLLayout.OneColumn);
