@@ -11,33 +11,11 @@
   --sapShell_Background : rgb(177, 177, 177) !important;
   --_ui5_fcl_decoration_top: null !important;
   --_ui5_fcl_decoration_bottom: null !important;
-  
- 
 }
-
 
 span.ui5-avatar-img{
   background-color: crimson !important;
 }
-/* scrollbar */
-/* body::-webkit-scrollbar {
-  width: 10px;
-}
- 
-body::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
- 
-body::-webkit-scrollbar-thumb {
-  border: 2px dotted var(--accent01);;
-} */
-
-/* body {
-  background-color: #222;
-  background-color: var(--background-color);
-  display: flex-inline;
-  font-family: "Georgia",serif;
-} */
 
 ui5-li, .card-content{
   background-color: var(--light-color) !important;
@@ -48,8 +26,8 @@ ui5-li, .card-content{
   margin: 10px;
   padding: 10px;
   text-align: center;
-  
 }
+
 .ui5-li-title *{
   margin: 10px !important;
   padding: 10px !important;
@@ -60,13 +38,6 @@ ui5-avatar {
   max-width: 30px;
   max-height: 30px;
 }
-
-
-/* .oldBackground{
-  background-color: var(--main-color);
-  border-radius: 10px;
-  border: 1px solid var(--light-color);
-} */
 
 .divsBacckground{
   background-color: var(--strong-highlight-color) !important;
