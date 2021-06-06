@@ -33,8 +33,8 @@ function App() {
 
   var randomIndex = 0;
 
-  const itemsReadyToDraw = [melee[0]];
-  const itemThatHasBeenDrawn = [melee[0]];
+  const itemsReadyToDraw = [melee[0],melee[1],melee[2],melee[3]];
+  const itemThatHasBeenDrawn = [melee[0],melee[1],melee[2],melee[3]];
   const historyOfDrawnedItems = [];
 
   const [ChoosenObject, setChoosenObject] = useState(mockChoosenObject)
@@ -68,47 +68,56 @@ function App() {
       ></ui5-shellbar>
       <Grid className="appBackground" defaultSpan="XL12 L12 M12 S12" style={{ padding: 10 }}>
         <div data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
-          <FlexibleColumnLayout className='divsBacckground'
-              style={{
-                height: '600px'
-              }} 
-              layout={layoutHistoryOfDrawnItems} 
-              startColumn={<> 
-                <Toolbar>
-                <Title className='titleDescriptor'>Obecnie wylosowane przedmioty</Title> 
-                <ToolbarSpacer/>
-                <Button icon="add" design={ButtonDesign.Transparent} onClick={() => {
-                   setHistoryOfDrawnItemsLayout(FCLLayout.TwoColumnsMidExpanded);
-                }}/>
-                </Toolbar>
-                <List style={{height: '400px'}} growing="Scroll">
-                  {selectedItemThatHasBeenDrawn.map(item => 
-                    <StandardListItem description="kliknij aby zobaczyć szczegóły" onClick={() => setChoosenObject(specificObject.filter(x => x.name === item.name)[0])}> 
-                      <p className='itemName drawnItem'>{item.name}</p>
-                    </StandardListItem >
-                  )}
+        <FlexibleColumnLayout className='divsBacckground'
+            
+            style={{
+              height: '600px'
+            }} 
+            layout={layoutDrawItems}
+            onLayoutChange={function noRefCheck() { }}
+            
+            startColumn={
+              <div>
+              <Toolbar>
+                <Title  className='titleDescriptor'>Lista przedmiotów losowanych</Title>
+              </Toolbar>
+              <button className="actionButton buttonRollDiece" design="Positive" onClick={() => {
+                setSelectedItemThatHasBeenDrawn([]);
+                const drawingItems = []
+                if (selectedItemsReadyToDraw.length > 0){
+                  for (let i = 0; i < quantityOfRolls ; i +=1){
+                    drawingItems.push(selectedItemsReadyToDraw[Math.floor(Math.random() * (selectedItemsReadyToDraw.length))])
+                  }
+                  setSelectedItemThatHasBeenDrawn([...drawingItems])
+                }
+                else{ setSelectedItemThatHasBeenDrawn([])};
+                setSelectedHistoryOfDrawnedItems([...selectedHistoryOfDrawnedItems,...selectedItemThatHasBeenDrawn])
+              }}>
+                <span className='buttonText'>Losuj przedmiot</span><br/>
+                <input
+                  className="slider"
+                  type="range"
+                  min="1"
+                  max="10"
+                  value={quantityOfRolls}
+                  onChange={changeInQuanitytOfRolls}
+                />
+                <span class='buttonText'>liczba losowań: {quantityOfRolls}</span>
+              </button>
+              <button className="actionButton buttonRemove"  onClick={()  => setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name === 12345 ))}>
+              <span className='buttonText'>Oczyść listę</span>
+              </button>
+              <List mode="None" onItemClick={object => { console.log(object, selectedItemsReadyToDraw); setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name !== object.detail.item.innerText))}}>
+                {selectedItemsReadyToDraw.map(item => 
+                <StandardListItem description="kliknij aby usunąć">
+                   {/* currently, displayed text should not by modified. If, for example, it would be UpperCased (even if only first letter), function that is responsible for removing this particular object from list, won't work. */}
+                  <p className='itemName'>{item.name}</p>
+                </StandardListItem >)}
                 </List>
-              </>} 
-              midColumn={<>
-                <Toolbar>
-                <Title className='titleDescriptor'>Historia Wylosowanych Przedmiotów</Title> 
-                <ToolbarSpacer/>
-                <button className="actionButton buttonRemove" onClick={() => setSelectedHistoryOfDrawnedItems(selectedHistoryOfDrawnedItems.filter(item => item.name === 12345 ))}>
-                <span className='buttonText'> Oczyść listę</span>
-                </button>
-                <Button icon="decline" design={ButtonDesign.Transparent} onClick={() => {
-                  setHistoryOfDrawnItemsLayout(FCLLayout.OneColumn);
-                }}/>
-                </Toolbar>
-                <List style={{height: '400px'}} growing="Scroll">
-                  {selectedHistoryOfDrawnedItems.map(item => 
-                    <StandardListItem description="kliknij aby zobaczyć szczegóły" onClick={() => setChoosenObject(specificObject.filter(x => x.name === item.name)[0])}>
-                      <p className='itemNameHistoryItem'>{item.name}</p>
-                      
-                    </StandardListItem>)}
-                </List>
-              </>}           
+              </div>}
+           
           />
+          
       </div>
       <div className='divsBacckground' data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
       <FlexibleColumnLayout className='divsBacckground'
@@ -178,54 +187,46 @@ function App() {
                 </>}/>
         </div>      
         <div data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
-          <FlexibleColumnLayout className='divsBacckground'
-            
-            style={{
-              height: '600px'
-            }} 
-            layout={layoutDrawItems}
-            onLayoutChange={function noRefCheck() { }}
-            
-            startColumn={
-              <div>
-              <Toolbar>
-                <Title  className='titleDescriptor'>Lista przedmiotów losowanych</Title>
-              </Toolbar>
-              <button className="actionButton buttonRollDiece" design="Positive" onClick={() => {
-                setSelectedItemThatHasBeenDrawn([]);
-                const drawingItems = []
-                if (selectedItemsReadyToDraw.length > 0){
-                  for (let i = 0; i < quantityOfRolls ; i +=1){
-                    drawingItems.push(selectedItemsReadyToDraw[Math.floor(Math.random() * (selectedItemsReadyToDraw.length))])
-                  }
-                  setSelectedItemThatHasBeenDrawn([...drawingItems])
-                }
-                else{ setSelectedItemThatHasBeenDrawn([])};
-                setSelectedHistoryOfDrawnedItems([...selectedHistoryOfDrawnedItems,...selectedItemThatHasBeenDrawn])
-              }}>
-                <span className='buttonText'>Losuj przedmiot</span><br/>
-                <input
-                  className="slider"
-                  type="range"
-                  min="1"
-                  max="10"
-                  value={quantityOfRolls}
-                  onChange={changeInQuanitytOfRolls}
-                />
-                <span class='buttonText'>liczba losowań: {quantityOfRolls}</span>
-              </button>
-              <button className="actionButton buttonRemove"  onClick={()  => setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name === 12345 ))}>
-              <span className='buttonText'>Oczyść listę</span>
-              </button>
-              <List mode="None" onItemClick={object => { console.log(object, selectedItemsReadyToDraw); setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name !== object.detail.item.innerText))}}>
-                {selectedItemsReadyToDraw.map(item => 
-                <StandardListItem description="kliknij aby usunąć">
-                   {/* currently, displayed text should not by modified. If, for example, it would be UpperCased (even if only first letter), function that is responsible for removing this particular object from list, won't work. */}
-                  <p className='itemName'>{item.name}</p>
-                </StandardListItem >)}
+        <FlexibleColumnLayout className='divsBacckground'
+              style={{
+                height: '600px'
+              }} 
+              layout={layoutHistoryOfDrawnItems} 
+              startColumn={<> 
+                <Toolbar>
+                <Title className='titleDescriptor'>Obecnie wylosowane przedmioty</Title> 
+                <ToolbarSpacer/>
+                <Button icon="add" design={ButtonDesign.Transparent} onClick={() => {
+                   setHistoryOfDrawnItemsLayout(FCLLayout.TwoColumnsMidExpanded);
+                }}/>
+                </Toolbar>
+                <List style={{height: '600px'}} growing="Scroll">
+                  {selectedItemThatHasBeenDrawn.map(item => 
+                    <StandardListItem description="kliknij aby zobaczyć szczegóły" onClick={() => setChoosenObject(specificObject.filter(x => x.name === item.name)[0])}> 
+                      <p className='itemName drawnItem'>{item.name}</p>
+                    </StandardListItem >
+                  )}
                 </List>
-              </div>}
-           
+              </>} 
+              midColumn={<>
+                <Toolbar>
+                <Title className='titleDescriptor'>Historia Wylosowanych Przedmiotów</Title> 
+                <ToolbarSpacer/>
+                <button className="actionButton buttonRemove" onClick={() => setSelectedHistoryOfDrawnedItems(selectedHistoryOfDrawnedItems.filter(item => item.name === 12345 ))}>
+                <span className='buttonText'> Oczyść listę</span>
+                </button>
+                <Button icon="decline" design={ButtonDesign.Transparent} onClick={() => {
+                  setHistoryOfDrawnItemsLayout(FCLLayout.OneColumn);
+                }}/>
+                </Toolbar>
+                <List style={{height: '600px'}} growing="Scroll">
+                  {selectedHistoryOfDrawnedItems.map(item => 
+                    <StandardListItem description="kliknij aby zobaczyć szczegóły" onClick={() => setChoosenObject(specificObject.filter(x => x.name === item.name)[0])}>
+                      <p className='itemNameHistoryItem'>{item.name}</p>
+                      
+                    </StandardListItem>)}
+                </List>
+              </>}           
           />
         </div>
       </Grid>

@@ -161,8 +161,8 @@ ui5-avatar {
 
 .buttonRollDiece{
   box-shadow: 0 2px 2px var(--shadow-color);
-  color: #cffac6;
-  text-shadow: 0 0 5px #06ee0e;
+  color: rgb(252, 250, 233);
+  text-shadow: 0 0 5px #ffb908;
 }
 
 .buttonRollDiece:active{
