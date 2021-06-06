@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { FlexibleColumnLayout, List, StandardListItem,  Title,  Grid, FCLLayout, Toolbar,  ToolbarSpacer, Button, ButtonDesign } from '@ui5/webcomponents-react';
-// import { setTheme } from '@ui5/webcomponents-base/dist/config/Theme';
 import  { melee, ranged, armor, clothes } from './itemsVault';
 import "@ui5/webcomponents/dist/Assets.js";
 import "@ui5/webcomponents-fiori/dist/Assets.js"; //  if you use @ui5/webcomponents-fiori
-import { setTheme } from "@ui5/webcomponents-base/dist/config/Theme.js";
 import './App.css';
 import {
   armorImg,
@@ -16,12 +14,6 @@ import {
 
 function App() {
 
-  // setTheme("sap_belize");
-  // setTheme("sap_belize_hcb");
-  // setTheme("sap_belize_hcw");
-  // setTheme("sap_fiori_3");
-  // setTheme("sap_fiori_dark");
-
   const objectCategory= [
     {name: 'Armors', category: 'armor', image:armorImg},{name: 'Melee weapons', category: 'melee', image:meleeImg},{name: 'Ranged weapons', category: 'ranged', image:rangedImg}, {name: 'Clothes', category: 'clothes', image:clothesImg}
   ];
@@ -31,26 +23,17 @@ function App() {
   // merge all arrays with items into one.
   const specificObject = melee.concat(ranged,armor,clothes);
 
-  var randomIndex = 0;
-
   const itemsReadyToDraw = [melee[0],melee[1],melee[2],melee[3]];
   const itemThatHasBeenDrawn = [melee[0],melee[1],melee[2],melee[3]];
   const historyOfDrawnedItems = [];
-
   const [ChoosenObject, setChoosenObject] = useState(mockChoosenObject)
-
   const [layoutHistoryOfDrawnItems, setHistoryOfDrawnItemsLayout] = useState(FCLLayout.OneColumn);
   const [layoutChooseItems, setChooseItemsLayout] = useState(FCLLayout.OneColumn);
   const [layoutDrawItems, setDrawItemsLayout] = useState(FCLLayout.OneColumn);
-  
- 
   const [selectedObjectCategory, setSelectedObjectCategory] = useState(objectCategory[0]);
-  const [selectedSpecificObject, setSelectedspecificObject] = useState(specificObject[0]);
-
   const [selectedItemsReadyToDraw, setSelectedItemsReadyToDraw] = useState(itemsReadyToDraw)
   const [selectedItemThatHasBeenDrawn, setSelectedItemThatHasBeenDrawn] = useState(itemThatHasBeenDrawn)
   const [selectedHistoryOfDrawnedItems, setSelectedHistoryOfDrawnedItems] = useState(historyOfDrawnedItems)
-
   const [quantityOfRolls, setQuantityOfRolls] = useState(1)
 
   const onCategoryItemClick = e => {
@@ -115,9 +98,7 @@ function App() {
                 </StandardListItem >)}
                 </List>
               </div>}
-           
-          />
-          
+          />  
       </div>
       <div className='divsBacckground' data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
       <FlexibleColumnLayout className='divsBacckground'
@@ -125,19 +106,17 @@ function App() {
           height: '600px'
         }} 
         layout={FCLLayout.OneColumn} 
-        startColumn={<>
-        
+        startColumn={<> 
         <Toolbar>
           <Title className='titleDescriptor'>Informacje o wybranym przedmiocie</Title> 
         </Toolbar>
         <ui5-list  mode="None" separators="None"  style={{height: '500px'}} growing="Scroll">
           {Object.entries(ChoosenObject).map(value => <ui5-li type="Inactive"><span className='itemPropDescriptor'>{value[0].toUpperCase()}</span> : { value[1].charAt(0) === "/" ? <ui5-avatar image={ChoosenObject.image} ></ui5-avatar> : <span className='itemPropName'>{value[1]}</span>}</ui5-li>)}
         </ui5-list>
-       
+
         </>} 
         />
       </div>
-
         <div data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
           <FlexibleColumnLayout className='divsBacckground'
             style={{
@@ -147,44 +126,37 @@ function App() {
               <Toolbar>
               <Title className='titleDescriptor'>Kategorie przedmiotów do losowania</Title>
                </Toolbar>
-              
               <List onItemClick={onCategoryItemClick}>
-            
-                {objectCategory.map(item => <StandardListItem description={`Quantity:  ${specificObject.filter(x => x.category === item.category).length}`} data-name={item.name} image={item.image} data-category={item.category}>
-                  <span className='itemPropName'>{item.name}</span>
-                
-                </StandardListItem>)}
+                {objectCategory.map(item => 
+                  <StandardListItem description={`Quantity:  ${specificObject.filter(x => x.category === item.category).length}`} data-name={item.name} image={item.image} data-category={item.category}>
+                    <span className='itemPropName'>{item.name}</span>
+                  </StandardListItem>)}
               </List>
-            </>} midColumn={<>
+            </>} 
+            midColumn={<>
               <Toolbar>
-                
                 <Title className='titleDescriptor'>{selectedObjectCategory.name}</Title>
                 <ToolbarSpacer />
-
-                <Button icon="decline" design={ButtonDesign.Transparent} onClick={() => {
-                  setChooseItemsLayout(FCLLayout.OneColumn);
-                }} />
-                
+                <Button icon="decline" design={ButtonDesign.Transparent} onClick={() => 
+                  {setChooseItemsLayout(FCLLayout.OneColumn)}}
+                />
               </Toolbar>
               <List id="itemsToDrawList" mode="SingleSelect" onItemClick={(item) => setSelectedItemsReadyToDraw([...selectedItemsReadyToDraw,{name: `${item.detail.item.dataset.name}`}])}>
                 {specificObject.filter(item => item.category === selectedObjectCategory.category).map(item => 
                 <StandardListItem data-name={item.name} image={item.image}>
-                  
                   {item.name.toUpperCase()}
-                  
                 </StandardListItem>)}
               </List>
             </>}           
-                endColumn={<>
-                <Toolbar>
-                <Title>Miejsce na kontrolki losowania</Title>
-                
-                <ToolbarSpacer />
-                <Button icon="decline" design={ButtonDesign.Transparent} onClick={() => {
-                  setChooseItemsLayout(FCLLayout.OneColumn);
-                }} />
-              </Toolbar>      
-                </>}/>
+            endColumn={<>
+            <Toolbar>
+            <Title>Miejsce na kontrolki losowania</Title>
+            <ToolbarSpacer />
+            <Button icon="decline" design={ButtonDesign.Transparent} onClick={() => {
+              setChooseItemsLayout(FCLLayout.OneColumn);
+            }} />
+            </Toolbar>      
+            </>}/>
         </div>      
         <div data-layout-span="XL6 L6 M12 S12" data-layout-indent="XL0 L0 M0 S0">
         <FlexibleColumnLayout className='divsBacckground'
