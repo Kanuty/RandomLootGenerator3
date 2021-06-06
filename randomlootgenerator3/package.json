@@ -1,6 +1,6 @@
 {
   "name": "randomlootgenerator3",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
@@ -17,8 +17,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": "react-app"
