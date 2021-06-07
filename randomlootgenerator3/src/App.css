@@ -8,17 +8,16 @@
   --shadow-color: #333;
   --background-color: #222;
   --sapTextColor: #fff !important;
-  --sapShell_Background : rgb(177, 177, 177) !important;
+  --sapShell_Background : rgb(49, 49, 42) !important;
   --_ui5_fcl_decoration_top: null !important;
   --_ui5_fcl_decoration_bottom: null !important;
+  --_ui5_wiz_tab_icon_color: #aaa !important;
+  --sapContent_IconColor: #aaa !important;
 }
 
-span.ui5-avatar-img{
-  background-color: crimson !important;
-}
 
 ui5-li, .card-content{
-  background-color: var(--light-color) !important;
+  background-color: rgb(26, 26, 26, 0.6) !important;
   border: 1px solid var(--strong-highlight-color);
   border-radius: 10px;
   box-shadow: 0 2px 2px var(--shadow-color);
@@ -27,6 +26,11 @@ ui5-li, .card-content{
   padding: 10px;
   text-align: center;
 }
+
+ui5-list, .form{
+  background-color:  !important;
+}
+
 
 .ui5-li-title *{
   margin: 10px !important;
@@ -40,14 +44,16 @@ ui5-avatar {
 }
 
 .divsBacckground{
-  background-color: var(--strong-highlight-color) !important;
+  /* background-color: var(--strong-highlight-color) !important; */
   border: 1px solid var(--light-color);
   border-radius: 10px;
   box-shadow: 0 2px 2px var(--shadow-color);
+  overflow-x: hidden; 
+  overflow-y: hidden; 
 }
 
 .appBackground{
-  background-color: var(--shadow-color);
+  background-color: #111;
 }
 
 .itemName{
@@ -55,21 +61,21 @@ ui5-avatar {
   margin: 5px;
   padding:5px;
   color: rgb(218, 245, 248);
-  text-shadow: 0 0 5px #16b3e2;
+  text-shadow: 0 0 5px #032731;
   font-family:fantasy
 }
 
 .itemPropDescriptor{
   font-family:fantasy;
   color: rgb(255, 255, 255);
-  text-shadow: 0 0 5px #aeb10c;
+  text-shadow: 0 0 5px #414207;
   padding: 5px;
 }
 
 .itemPropName{
   font-family:fantasy;
   color: rgb(218, 245, 248);
-  text-shadow: 0 0 5px #16b3e2;
+  text-shadow: 0 0 2px #032029;
   padding: 5px;
   margin:5px;
 }
@@ -79,7 +85,7 @@ ui5-avatar {
   margin: 5px;
   padding:5px;
   color: rgb(252, 250, 233);
-  text-shadow: 0 0 5px #ffb908;
+  text-shadow: 0 0 5px #03182c;
   text-transform: capitalize;
   font-family:fantasy
 }
@@ -91,14 +97,13 @@ ui5-avatar {
 .titleDescriptor{
   font-family:fantasy;
   color: rgb(235, 237, 243);
-  text-shadow: 0px 0px 5px #296dff;
-
+  text-shadow: 0px 0px 2px #020d26;
   padding:9px;
   margin:9px;
 }
 
 .actionButton{
-  background-color: var(--main-color);
+  background-color: rgba(12, 225, 58, 0.4);
   border-radius: 10px;
   border: 1px solid var(--light-color);
   cursor: pointer;
@@ -120,7 +125,7 @@ ui5-avatar {
 }
  .buttonRemove{
   box-shadow: 0 2px 2px var(--shadow-color);
-  color: #fac3c3;
+  color: #faf1f1;
   text-shadow: 0 0 5px #ff1100;
 }
 
@@ -149,8 +154,8 @@ ui5-avatar {
 .slider {
   -webkit-appearance: none;  
   width: 100%; 
-  height: 7px; 
-  background: var(--main-color);
+  height: 35px; 
+  background: rgb(31, 28, 26);
   border: 1px solid var(--strong-highlight-color);
   outline: none; 
   margin: 5px;
@@ -163,10 +168,10 @@ ui5-avatar {
   appearance: none;
   width: 13px;
   height: 35px; 
-  background: #444; 
+  background: rgb(16, 151, 72); 
   border-radius: 3px;
-  border: 1px solid var(--strong-highlight-color);
-  box-shadow: 2px 2px 5px var(--shadow-color);
+  border: 1px solid rgb(221, 201, 196);
+  box-shadow: 0px 0px 2px rgb(87, 15, 15);
   cursor: pointer; 
 }
 

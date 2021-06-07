@@ -40,9 +40,7 @@ function App() {
     setSelectedObjectCategory(objectCategory.find(item => item.category === e.detail.item.dataset.category));
     setChooseItemsLayout(FCLLayout.TwoColumnsMidExpanded)
   };
- 
-  const  changeInQuanitytOfRolls = e => setQuantityOfRolls(e.target.value)
-  
+
   return (
     <div className="App" >
       <ui5-shellbar
@@ -77,22 +75,24 @@ function App() {
                 setSelectedHistoryOfDrawnedItems([...selectedHistoryOfDrawnedItems,...selectedItemThatHasBeenDrawn])
               }}>
                 <span className='buttonText'>Draw</span><br/>
-                <input
+                
+                <span class='buttonText'>Quantity of draws: {quantityOfRolls}</span>
+              </button>
+              <input
+                  id="inputSlider"
                   className="slider"
                   type="range"
                   min="1"
                   max="10"
                   value={quantityOfRolls}
-                  onChange={changeInQuanitytOfRolls}
+                  onChange={ e => setQuantityOfRolls(e.target.value)}
                 />
-                <span class='buttonText'>Quantity of draws: {quantityOfRolls}</span>
-              </button>
               <button className="actionButton buttonRemove"  onClick={()  => setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name === 12345 ))}>
               <span className='buttonText'>Clean a list</span>
               </button>
-              <List mode="None" onItemClick={object => { console.log(object, selectedItemsReadyToDraw); setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name !== object.detail.item.innerText))}}>
+              <List mode="None"  onItemClick={object => { console.log(object, selectedItemsReadyToDraw); setSelectedItemsReadyToDraw(selectedItemsReadyToDraw.filter(item => item.name !== object.detail.item.innerText))}}>
                 {selectedItemsReadyToDraw.map(item => 
-                <StandardListItem description="kliknij aby usunąć">
+                <StandardListItem  description="kliknij aby usunąć">
                    {/* currently, displayed text should not by modified. If, for example, it would be UpperCased (even if only first letter), function that is responsible for removing this particular object from list, won't work. */}
                   <p className='itemName'>{item.name}</p>
                 </StandardListItem >)}
@@ -108,10 +108,10 @@ function App() {
         layout={FCLLayout.OneColumn} 
         startColumn={<> 
         <Toolbar>
-          <Title className='titleDescriptor'>Choosen item information</Title> 
+          <Title className='titleDescriptor'>Chosen item information</Title> 
         </Toolbar>
-        <ui5-list  mode="None" separators="None"  style={{height: '500px'}} growing="Scroll">
-          {Object.entries(ChoosenObject).map(value => <ui5-li type="Inactive"><span className='itemPropDescriptor'>{value[0].toUpperCase()}</span> : { value[1].charAt(0) === "/" ? <ui5-avatar image={ChoosenObject.image} ></ui5-avatar> : <span className='itemPropName'>{value[1]}</span>}</ui5-li>)}
+        <ui5-list  mode="None" separators="None" style={{height: '500px'}} growing="Scroll">
+          {Object.entries(ChoosenObject).map(value => <ui5-li className="form" type="Inactive"><span className='itemPropDescriptor'>{value[0].toUpperCase()}</span> : { value[1].charAt(0) === "/" ? <ui5-avatar image={ChoosenObject.image} ></ui5-avatar> : <span className='itemPropName'>{value[1]}</span>}</ui5-li>)}
         </ui5-list>
 
         </>} 
@@ -128,7 +128,7 @@ function App() {
                </Toolbar>
               <List onItemClick={onCategoryItemClick}>
                 {objectCategory.map(item => 
-                  <StandardListItem description={`Quantity:  ${specificObject.filter(x => x.category === item.category).length}`} data-name={item.name} image={item.image} data-category={item.category}>
+                  <StandardListItem   description={`Quantity:  ${specificObject.filter(x => x.category === item.category).length}`} data-name={item.name} image={item.image} data-category={item.category}>
                     <span className='itemPropName'>{item.name}</span>
                   </StandardListItem>)}
               </List>
@@ -143,7 +143,7 @@ function App() {
               </Toolbar>
               <List id="itemsToDrawList" mode="SingleSelect" onItemClick={(item) => setSelectedItemsReadyToDraw([...selectedItemsReadyToDraw,{name: `${item.detail.item.dataset.name}`}])}>
                 {specificObject.filter(item => item.category === selectedObjectCategory.category).map(item => 
-                <StandardListItem data-name={item.name} image={item.image}>
+                <StandardListItem  data-name={item.name} image={item.image}>
                   {item.name.toUpperCase()}
                 </StandardListItem>)}
               </List>
@@ -174,7 +174,7 @@ function App() {
                 </Toolbar>
                 <List style={{height: '600px'}} growing="Scroll">
                   {selectedItemThatHasBeenDrawn.map(item => 
-                    <StandardListItem description="kliknij aby zobaczyć szczegóły" onClick={() => setChoosenObject(specificObject.filter(x => x.name === item.name)[0])}> 
+                    <StandardListItem  description="kliknij aby zobaczyć szczegóły" onClick={() => setChoosenObject(specificObject.filter(x => x.name === item.name)[0])}> 
                       <p className='itemName drawnItem'>{item.name}</p>
                     </StandardListItem >
                   )}
@@ -193,7 +193,7 @@ function App() {
                 </Toolbar>
                 <List style={{height: '600px'}} growing="Scroll">
                   {selectedHistoryOfDrawnedItems.map(item => 
-                    <StandardListItem description="kliknij aby zobaczyć szczegóły" onClick={() => setChoosenObject(specificObject.filter(x => x.name === item.name)[0])}>
+                    <StandardListItem   description="kliknij aby zobaczyć szczegóły" onClick={() => setChoosenObject(specificObject.filter(x => x.name === item.name)[0])}>
                       <p className='itemNameHistoryItem'>{item.name}</p>
                       
                     </StandardListItem>)}
